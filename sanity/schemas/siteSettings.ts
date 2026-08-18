@@ -6,10 +6,32 @@ export const siteSettings = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'siteDescription',
+      type: 'text',
+      title: 'About the website — what Eklahimal is (2–4 sentences)',
+      validation: (R) => R.max(800),
+    }),
+    defineField({
+      name: 'authorName',
+      type: 'string',
+      title: 'Author / photographer name',
+    }),
+    defineField({
+      name: 'authorPortrait',
+      type: 'image',
+      title: 'Author portrait — optional headshot',
+      options: { hotspot: true },
+    }),
+    defineField({
       name: 'bio',
       type: 'text',
-      title: 'About line — 2 sentences max',
-      validation: (R) => R.max(500),
+      title: 'Author bio — full paragraph',
+      validation: (R) => R.max(1200),
+    }),
+    defineField({
+      name: 'foundationUrl',
+      type: 'url',
+      title: 'Eklahimal Foundation URL — leave blank until site is live',
     }),
     defineField({
       name: 'featuredFilm',

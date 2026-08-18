@@ -116,7 +116,11 @@ export interface StoryFormat {
 
 export interface SiteSettings {
   _id: string
+  siteDescription?: string
+  authorName?: string
+  authorPortrait?: SanityImage
   bio?: string
+  foundationUrl?: string
   featuredFilm?: Film
   youtubeUrl?: string
   instagramUrl?: string
