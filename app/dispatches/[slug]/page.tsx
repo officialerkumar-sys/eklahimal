@@ -64,25 +64,24 @@ export default async function DispatchPage({ params }: { params: { slug: string 
           <div style={{ marginTop: '64px' }}>
             <Link
               href={`/films/${dispatch.relatedFilm.slug.current}`}
-              style={{
-                fontSize: '11px',
-                textTransform: 'uppercase',
-                letterSpacing: 'var(--letter-spacing-label)',
-                color: 'var(--color-text-muted)',
-                textDecoration: 'none',
-                transition: 'color var(--transition-base)',
-              }}
-              onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.color = 'var(--color-text)'
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.color = 'var(--color-text-muted)'
-              }}
+              className="dispatch-film-link"
             >
               film → {dispatch.relatedFilm.title}
             </Link>
           </div>
         )}
+
+        <style>{`
+          .dispatch-film-link {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-label);
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color var(--transition-base);
+          }
+          .dispatch-film-link:hover { color: var(--color-text); }
+        `}</style>
       </div>
     </main>
   )

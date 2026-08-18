@@ -113,23 +113,21 @@ export default async function EssayPage({ params }: { params: { slug: string } }
         <div className="content-width" style={{ paddingBottom: 'var(--space-section)' }}>
           <Link
             href={`/films/${essay.relatedFilm.slug.current}`}
-            style={{
-              fontSize: '11px',
-              textTransform: 'uppercase',
-              letterSpacing: 'var(--letter-spacing-label)',
-              color: 'var(--color-text-muted)',
-              textDecoration: 'none',
-              transition: 'color var(--transition-base)',
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.color = 'var(--color-text)'
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.color = 'var(--color-text-muted)'
-            }}
+            className="essay-film-link"
           >
             film → {essay.relatedFilm.title}
           </Link>
+          <style>{`
+            .essay-film-link {
+              font-size: 11px;
+              text-transform: uppercase;
+              letter-spacing: var(--letter-spacing-label);
+              color: var(--color-text-muted);
+              text-decoration: none;
+              transition: color var(--transition-base);
+            }
+            .essay-film-link:hover { color: var(--color-text); }
+          `}</style>
         </div>
       )}
 
