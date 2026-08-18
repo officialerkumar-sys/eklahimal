@@ -40,7 +40,7 @@ export default async function EssayPage({ params }: { params: { slug: string } }
   if (!essay) notFound()
 
   return (
-    <main style={{ paddingTop: '56px', backgroundColor: 'var(--color-bg)' }}>
+    <main style={{ paddingTop: '56px', minHeight: '100dvh', backgroundColor: 'var(--color-bg)' }}>
       {/* Intro text — only shown if it exists */}
       {essay.intro && (
         <div className="content-width" style={{ paddingTop: '64px', paddingBottom: '64px' }}>

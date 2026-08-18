@@ -50,7 +50,7 @@ export default async function FilmPage({ params }: { params: { slug: string } })
   if (!film) notFound()
 
   return (
-    <main style={{ paddingTop: '56px' }}>
+    <main style={{ paddingTop: '56px', minHeight: '100dvh' }}>
 
       {/* YouTube embed — full width */}
       {film.youtubeUrl && (

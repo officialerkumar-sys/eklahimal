@@ -29,7 +29,7 @@ export default async function DispatchPage({ params }: { params: { slug: string 
   if (!dispatch) notFound()
 
   return (
-    <main style={{ paddingTop: '96px', paddingBottom: 'var(--space-section)' }}>
+    <main style={{ paddingTop: '96px', paddingBottom: 'var(--space-section)', minHeight: '100dvh' }}>
       <div className="content-width">
         {/* Title */}
         <h1

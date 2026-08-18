@@ -62,7 +62,7 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
     : null
 
   return (
-    <main style={{ paddingTop: '88px', paddingBottom: 'var(--space-section)' }}>
+    <main style={{ paddingTop: '88px', paddingBottom: 'var(--space-section)', minHeight: '100dvh' }}>
       <div className="content-width">
 
         {/* Format + day number */}
