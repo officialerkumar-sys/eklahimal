@@ -10,7 +10,6 @@ const navLinks = [
   { href: '/journal', label: 'journal' },
   { href: '/dispatches', label: 'dispatches' },
   { href: '/about', label: 'about' },
-  { href: '/archive', label: 'archive' },
 ] as const
 
 export default function Nav() {
