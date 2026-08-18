@@ -1,0 +1,29 @@
+:root {
+  /* Colors */
+  --color-bg:             #1C2128;
+  --color-bg-mid:         #3D4A5C;
+  --color-text:           #F2EDE8;
+  --color-text-muted:     #8A9BB0;
+  --color-accent:         #C4622D;
+  --color-accent-hover:   #E8965A;
+
+  /* Typography */
+  --font-base:            'Inter', sans-serif;
+  --font-size-body:       18px;
+  --font-size-caption:    14px;
+  --font-size-nav:        12px;
+  --font-size-display:    clamp(32px, 6vw, 72px);
+  --line-height-body:     1.75;
+  --letter-spacing-label: 0.10em;
+  --letter-spacing-brand: 0.15em;
+
+  /* Spacing */
+  --space-section:        clamp(48px, 8vw, 96px);
+  --space-card:           80px;
+  --space-content-max:    720px;
+  --space-media-max:      1200px;
+
+  /* Effects */
+  --grain-opacity:        0.035;
+  --transition-base:      300ms ease-out;
+}

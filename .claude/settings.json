@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(npm run *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(sleep 8 && cat /tmp/eklahimal-dev.log)",
+      "Read(//tmp/**)",
+      "Bash(rm \"d:/000_CLAUDE PROJECT/33_Ekla/next.config.ts\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{url_effective}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{url_effective}\" http://localhost:3000/films)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{url_effective}\" http://localhost:3000/journal)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{url_effective}\" http://localhost:3000/about)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{url_effective}\" http://localhost:3000/archive)",
+      "Bash(curl -s http://localhost:3001/)",
+      "Bash(curl -s http://localhost:3001/films)",
+      "Bash(curl -s http://localhost:3001/archive)"
+    ]
+  }
+}
