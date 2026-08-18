@@ -69,6 +69,16 @@ export interface Dispatch {
   featured?: boolean
 }
 
+export interface Expedition {
+  _id: string
+  title: string
+  slug: SanitySlug
+  year?: number
+  region?: Region
+  linkedFilm?: { _id: string; title: string; slug: SanitySlug }
+  order?: number
+}
+
 export interface JournalEntry {
   _id: string
   _type: 'journalEntry'
@@ -84,6 +94,7 @@ export interface JournalEntry {
   format?: 'field-note' | 'night-note' | 'lookback' | 'unglamorous'
   body?: PortableTextBlock[]
   images?: SanityImage[]
+  expedition?: Expedition
   linkedFilm?: Film
   featured?: boolean
 }

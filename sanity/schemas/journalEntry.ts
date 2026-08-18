@@ -47,6 +47,12 @@ export const journalEntry = defineType({
       of: [defineArrayMember({ type: 'image', options: { hotspot: true } })],
     }),
     defineField({
+      name: 'expedition',
+      type: 'reference',
+      to: [{ type: 'expedition' }],
+      title: 'Expedition / trip this entry belongs to — optional',
+    }),
+    defineField({
       name: 'linkedFilm',
       type: 'reference',
       to: [{ type: 'film' }],

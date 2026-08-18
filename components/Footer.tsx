@@ -11,6 +11,7 @@ const COL_TWO = [
   { href: '/dispatches', label: 'dispatches' },
   { href: '/about',      label: 'about' },
   { href: '/archive',    label: 'archive' },
+  { href: '/foundation', label: 'foundation' },
 ]
 
 const YEAR = new Date().getFullYear()
