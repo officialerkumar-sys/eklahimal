@@ -5,10 +5,13 @@ import PortableText from '@/components/PortableText'
 import { getDispatchBySlug, getAllDispatchSlugs } from '@/lib/sanity/queries/dispatches'
 
 export const revalidate = 60
+export const dynamicParams = true
 
 export async function generateStaticParams() {
   const slugs = await getAllDispatchSlugs()
-  return slugs.map((s) => ({ slug: s.slug.current }))
+  return slugs
+    .filter((s) => s.slug?.current)
+    .map((s) => ({ slug: s.slug.current }))
 }
 
 export async function generateMetadata({

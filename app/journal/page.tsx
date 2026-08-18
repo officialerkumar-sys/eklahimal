@@ -9,7 +9,7 @@ export default async function JournalPage() {
   const entries = await getJournalEntries()
 
   return (
-    <main style={{ paddingTop: '80px', paddingBottom: 'var(--space-section)' }}>
+    <main style={{ paddingTop: '80px', paddingBottom: 'var(--space-section)', minHeight: '100dvh' }}>
       <div className="media-width">
 
         {/* Page header */}

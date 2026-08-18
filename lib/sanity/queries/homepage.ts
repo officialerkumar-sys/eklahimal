@@ -19,16 +19,16 @@ export async function getHomepageData(): Promise<{
       _id, _type, title, slug, publishedAt, youtubeUrl, logline, duration,
       thumbnail, region->{ _id, name, slug }
     },
-    "films": *[_type == "film"] | order(publishedAt desc) [0...3] {
+    "films": *[_type == "film" && defined(slug.current)] | order(publishedAt desc) [0...3] {
       ${PIECE_FRAGMENT}, thumbnail, region->{ name, slug }
     },
-    "essays": *[_type == "photoEssay"] | order(publishedAt desc) [0...3] {
+    "essays": *[_type == "photoEssay" && defined(slug.current)] | order(publishedAt desc) [0...3] {
       ${PIECE_FRAGMENT}, coverImage, intro, region->{ name, slug }
     },
-    "dispatches": *[_type == "dispatch"] | order(publishedAt desc) [0...3] {
+    "dispatches": *[_type == "dispatch" && defined(slug.current)] | order(publishedAt desc) [0...3] {
       ${PIECE_FRAGMENT}, region->{ name, slug }
     },
-    "journal": *[_type == "journalEntry"] | order(publishedAt desc) [0...3] {
+    "journal": *[_type == "journalEntry" && defined(slug.current)] | order(publishedAt desc) [0...3] {
       ${PIECE_FRAGMENT}, region->{ name, slug }
     }
   }`)

@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { slugify } from '../lib/slugify'
 
 export const journalEntry = defineType({
   name: 'journalEntry',
@@ -11,7 +12,7 @@ export const journalEntry = defineType({
       title: 'Title — can be a date or a single phrase',
       validation: (R) => R.required(),
     }),
-    defineField({ name: 'slug', type: 'slug', options: { source: 'title' }, validation: (R) => R.required() }),
+    defineField({ name: 'slug', type: 'slug', options: { source: 'title', slugify }, validation: (R) => R.required() }),
     defineField({ name: 'publishedAt', type: 'datetime', validation: (R) => R.required() }),
     defineField({ name: 'region', type: 'reference', to: [{ type: 'region' }] }),
     defineField({ name: 'elevation', type: 'number', title: 'Elevation when written (metres, optional)' }),

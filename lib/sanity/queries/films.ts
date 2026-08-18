@@ -20,12 +20,12 @@ export async function getFilms(page = 1, perPage = 8): Promise<Film[]> {
   const start = (page - 1) * perPage
   const end = start + perPage
   return (await safeFetch<Film[]>(
-    groq`*[_type == "film"] | order(publishedAt desc) [${start}...${end}] { ${FILM_CARD_FRAGMENT} }`
+    groq`*[_type == "film" && defined(slug.current)] | order(publishedAt desc) [${start}...${end}] { ${FILM_CARD_FRAGMENT} }`
   )) ?? []
 }
 
 export async function getFilmsCount(): Promise<number> {
-  return (await safeFetch<number>(groq`count(*[_type == "film"])`)) ?? 0
+  return (await safeFetch<number>(groq`count(*[_type == "film" && defined(slug.current)])`)) ?? 0
 }
 
 export async function getFilmBySlug(slug: string): Promise<Film | null> {
@@ -43,11 +43,13 @@ export async function getFeaturedFilm(): Promise<Film | null> {
 
 export async function getRecentFilms(limit = 3): Promise<Film[]> {
   return (await safeFetch<Film[]>(
-    groq`*[_type == "film"] | order(publishedAt desc) [0...$limit] { ${FILM_CARD_FRAGMENT} }`,
+    groq`*[_type == "film" && defined(slug.current)] | order(publishedAt desc) [0...$limit] { ${FILM_CARD_FRAGMENT} }`,
     { limit }
   )) ?? []
 }
 
 export async function getAllFilmSlugs(): Promise<{ slug: { current: string } }[]> {
-  return (await safeFetch<{ slug: { current: string } }[]>(groq`*[_type == "film"]{ slug }`)) ?? []
+  return (await safeFetch<{ slug: { current: string } }[]>(
+    groq`*[_type == "film" && defined(slug.current)]{ slug }`
+  )) ?? []
 }

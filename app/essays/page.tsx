@@ -14,7 +14,7 @@ export default async function EssaysPage() {
   const rightCol = essays.filter((_, i) => i % 2 !== 0)
 
   return (
-    <main style={{ paddingTop: '80px', paddingBottom: 'var(--space-section)' }}>
+    <main style={{ paddingTop: '80px', paddingBottom: 'var(--space-section)', minHeight: '100dvh' }}>
       <div className="media-width">
 
         {/* Page header */}

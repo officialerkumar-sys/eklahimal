@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { slugify } from '../lib/slugify'
 
 export const photoEssay = defineType({
   name: 'photoEssay',
@@ -6,7 +7,7 @@ export const photoEssay = defineType({
   type: 'document',
   fields: [
     defineField({ name: 'title', type: 'string', validation: (R) => R.required() }),
-    defineField({ name: 'slug', type: 'slug', options: { source: 'title' }, validation: (R) => R.required() }),
+    defineField({ name: 'slug', type: 'slug', options: { source: 'title', slugify }, validation: (R) => R.required() }),
     defineField({ name: 'publishedAt', type: 'datetime', validation: (R) => R.required() }),
     defineField({ name: 'region', type: 'reference', to: [{ type: 'region' }] }),
     defineField({ name: 'coverImage', type: 'image', options: { hotspot: true } }),

@@ -18,7 +18,7 @@ const JOURNAL_FULL_FRAGMENT = groq`
 
 export async function getJournalEntries(): Promise<JournalEntry[]> {
   return (await safeFetch<JournalEntry[]>(
-    groq`*[_type == "journalEntry"] | order(publishedAt desc) { ${JOURNAL_LIST_FRAGMENT} }`
+    groq`*[_type == "journalEntry" && defined(slug.current)] | order(publishedAt desc) { ${JOURNAL_LIST_FRAGMENT} }`
   )) ?? []
 }
 
@@ -31,11 +31,13 @@ export async function getJournalEntryBySlug(slug: string): Promise<JournalEntry 
 
 export async function getRecentJournalEntries(limit = 3): Promise<JournalEntry[]> {
   return (await safeFetch<JournalEntry[]>(
-    groq`*[_type == "journalEntry"] | order(publishedAt desc) [0...$limit] { ${JOURNAL_LIST_FRAGMENT} }`,
+    groq`*[_type == "journalEntry" && defined(slug.current)] | order(publishedAt desc) [0...$limit] { ${JOURNAL_LIST_FRAGMENT} }`,
     { limit }
   )) ?? []
 }
 
 export async function getAllJournalSlugs(): Promise<{ slug: { current: string } }[]> {
-  return (await safeFetch<{ slug: { current: string } }[]>(groq`*[_type == "journalEntry"]{ slug }`)) ?? []
+  return (await safeFetch<{ slug: { current: string } }[]>(
+    groq`*[_type == "journalEntry" && defined(slug.current)]{ slug }`
+  )) ?? []
 }

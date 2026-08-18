@@ -13,19 +13,19 @@ export async function getAllPieces(regionSlug?: string): Promise<ArchivePiece[]>
 
   const [films, essays, dispatches, journal] = await Promise.all([
     safeFetch<ArchivePiece[]>(
-      groq`*[_type == "film" ${regionFilter}] | order(publishedAt desc) { ${PIECE_FRAGMENT} }`,
+      groq`*[_type == "film" && defined(slug.current) ${regionFilter}] | order(publishedAt desc) { ${PIECE_FRAGMENT} }`,
       params
     ),
     safeFetch<ArchivePiece[]>(
-      groq`*[_type == "photoEssay" ${regionFilter}] | order(publishedAt desc) { ${PIECE_FRAGMENT} }`,
+      groq`*[_type == "photoEssay" && defined(slug.current) ${regionFilter}] | order(publishedAt desc) { ${PIECE_FRAGMENT} }`,
       params
     ),
     safeFetch<ArchivePiece[]>(
-      groq`*[_type == "dispatch" ${regionFilter}] | order(publishedAt desc) { ${PIECE_FRAGMENT} }`,
+      groq`*[_type == "dispatch" && defined(slug.current) ${regionFilter}] | order(publishedAt desc) { ${PIECE_FRAGMENT} }`,
       params
     ),
     safeFetch<ArchivePiece[]>(
-      groq`*[_type == "journalEntry" ${regionFilter}] | order(publishedAt desc) { ${PIECE_FRAGMENT} }`,
+      groq`*[_type == "journalEntry" && defined(slug.current) ${regionFilter}] | order(publishedAt desc) { ${PIECE_FRAGMENT} }`,
       params
     ),
   ])

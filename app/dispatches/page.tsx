@@ -29,7 +29,7 @@ export default async function DispatchesPage() {
   const dispatches = (await getDispatches()) as DispatchListItem[]
 
   return (
-    <main style={{ paddingTop: '80px', paddingBottom: 'var(--space-section)' }}>
+    <main style={{ paddingTop: '80px', paddingBottom: 'var(--space-section)', minHeight: '100dvh' }}>
       <div className="content-width">
 
         {/* Page header */}

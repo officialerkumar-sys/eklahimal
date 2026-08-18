@@ -9,10 +9,13 @@ import { getFilmBySlug, getAllFilmSlugs } from '@/lib/sanity/queries/films'
 import { urlForImage } from '@/lib/sanity/image'
 
 export const revalidate = 60
+export const dynamicParams = true
 
 export async function generateStaticParams() {
   const slugs = await getAllFilmSlugs()
-  return slugs.map((s) => ({ slug: s.slug.current }))
+  return slugs
+    .filter((s) => s.slug?.current)
+    .map((s) => ({ slug: s.slug.current }))
 }
 
 export async function generateMetadata({

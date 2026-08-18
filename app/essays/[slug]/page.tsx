@@ -6,10 +6,13 @@ import { getEssayBySlug, getAllEssaySlugs } from '@/lib/sanity/queries/essays'
 import { urlForImage } from '@/lib/sanity/image'
 
 export const revalidate = 60
+export const dynamicParams = true
 
 export async function generateStaticParams() {
   const slugs = await getAllEssaySlugs()
-  return slugs.map((s) => ({ slug: s.slug.current }))
+  return slugs
+    .filter((s) => s.slug?.current)
+    .map((s) => ({ slug: s.slug.current }))
 }
 
 export async function generateMetadata({

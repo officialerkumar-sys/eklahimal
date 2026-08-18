@@ -19,7 +19,7 @@ export default async function AboutPage() {
     : null
 
   return (
-    <main style={{ paddingTop: '56px' }}>
+    <main style={{ paddingTop: '56px', minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>
       {/* Landscape photograph — fills width, no hero text */}
       {heroImage && (
         <div
@@ -28,6 +28,7 @@ export default async function AboutPage() {
             height: '62vh',
             overflow: 'hidden',
             position: 'relative',
+            flexShrink: 0,
           }}
         >
           <Image
@@ -47,6 +48,7 @@ export default async function AboutPage() {
         style={{
           paddingTop: 'var(--space-section)',
           paddingBottom: 'var(--space-section)',
+          flex: 1,
         }}
       >
         {settings?.bio ? (
@@ -56,6 +58,8 @@ export default async function AboutPage() {
               lineHeight: 'var(--line-height-body)',
               color: 'var(--color-text)',
               textTransform: 'lowercase',
+              whiteSpace: 'pre-line',
+              maxWidth: '600px',
             }}
           >
             {settings.bio}

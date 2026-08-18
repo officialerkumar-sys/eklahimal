@@ -17,7 +17,7 @@ const ESSAY_FULL_FRAGMENT = groq`
 
 export async function getEssays(): Promise<PhotoEssay[]> {
   return (await safeFetch<PhotoEssay[]>(
-    groq`*[_type == "photoEssay"] | order(publishedAt desc) { ${ESSAY_CARD_FRAGMENT} }`
+    groq`*[_type == "photoEssay" && defined(slug.current)] | order(publishedAt desc) { ${ESSAY_CARD_FRAGMENT} }`
   )) ?? []
 }
 
@@ -30,11 +30,13 @@ export async function getEssayBySlug(slug: string): Promise<PhotoEssay | null> {
 
 export async function getRecentEssays(limit = 3): Promise<PhotoEssay[]> {
   return (await safeFetch<PhotoEssay[]>(
-    groq`*[_type == "photoEssay"] | order(publishedAt desc) [0...$limit] { ${ESSAY_CARD_FRAGMENT} }`,
+    groq`*[_type == "photoEssay" && defined(slug.current)] | order(publishedAt desc) [0...$limit] { ${ESSAY_CARD_FRAGMENT} }`,
     { limit }
   )) ?? []
 }
 
 export async function getAllEssaySlugs(): Promise<{ slug: { current: string } }[]> {
-  return (await safeFetch<{ slug: { current: string } }[]>(groq`*[_type == "photoEssay"]{ slug }`)) ?? []
+  return (await safeFetch<{ slug: { current: string } }[]>(
+    groq`*[_type == "photoEssay" && defined(slug.current)]{ slug }`
+  )) ?? []
 }

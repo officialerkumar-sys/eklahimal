@@ -16,7 +16,7 @@ const DISPATCH_FULL_FRAGMENT = groq`
 
 export async function getDispatches(): Promise<Dispatch[]> {
   return (await safeFetch<Dispatch[]>(
-    groq`*[_type == "dispatch"] | order(publishedAt desc) { ${DISPATCH_CARD_FRAGMENT} }`
+    groq`*[_type == "dispatch" && defined(slug.current)] | order(publishedAt desc) { ${DISPATCH_CARD_FRAGMENT} }`
   )) ?? []
 }
 
@@ -29,11 +29,13 @@ export async function getDispatchBySlug(slug: string): Promise<Dispatch | null> 
 
 export async function getRecentDispatches(limit = 3): Promise<Dispatch[]> {
   return (await safeFetch<Dispatch[]>(
-    groq`*[_type == "dispatch"] | order(publishedAt desc) [0...$limit] { ${DISPATCH_CARD_FRAGMENT} }`,
+    groq`*[_type == "dispatch" && defined(slug.current)] | order(publishedAt desc) [0...$limit] { ${DISPATCH_CARD_FRAGMENT} }`,
     { limit }
   )) ?? []
 }
 
 export async function getAllDispatchSlugs(): Promise<{ slug: { current: string } }[]> {
-  return (await safeFetch<{ slug: { current: string } }[]>(groq`*[_type == "dispatch"]{ slug }`)) ?? []
+  return (await safeFetch<{ slug: { current: string } }[]>(
+    groq`*[_type == "dispatch" && defined(slug.current)]{ slug }`
+  )) ?? []
 }
