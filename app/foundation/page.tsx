@@ -44,8 +44,8 @@ export default function FoundationPage() {
             maxWidth: '520px',
           }}
         >
-          the eklahimal foundation is being built to channel the stories from these expeditions into
-          real impact — conservation, access, and community in the himalaya.
+          a fund that enables one other indian traveler per year to go alone into the himalaya —
+          selected by essay. the application is the essay.
         </p>
 
         <p

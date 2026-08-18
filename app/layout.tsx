@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     default: 'Eklahimal',
     template: '%s — Eklahimal',
   },
-  description: 'Solo adventure storytelling from the Himalaya.',
+  description: 'alone in the himalaya. documenting what happens.',
   openGraph: {
     siteName: 'Eklahimal',
     type: 'website',

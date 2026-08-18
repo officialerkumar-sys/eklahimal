@@ -45,8 +45,8 @@ export default async function AboutPage() {
           </p>
         ) : (
           <p className="about-body" style={{ marginTop: '20px', maxWidth: '600px' }}>
-            eklahimal is a solo adventure storytelling platform from the himalaya — films, photo essays,
-            dispatches, and a field journal from high-altitude routes across india.
+            eklahimal documents what happens when you go alone into the himalaya — without a finished plan,
+            without a group, and without performing it for anyone. films, photographs, dispatches, and a field journal.
           </p>
         )}
 

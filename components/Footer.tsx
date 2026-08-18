@@ -63,7 +63,7 @@ export default async function Footer() {
               textTransform: 'lowercase',
             }}
           >
-            solo adventure storytelling from the himalaya.
+            alone in the himalaya. documenting what happens.
           </p>
         </div>
 
