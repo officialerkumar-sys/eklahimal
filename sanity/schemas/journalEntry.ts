@@ -17,6 +17,8 @@ export const journalEntry = defineType({
     defineField({ name: 'elevation', type: 'number', title: 'Elevation when written (metres, optional)' }),
     defineField({ name: 'temperature', type: 'string', title: 'Temperature (optional, e.g. -4°C)' }),
     defineField({ name: 'dayNumber', type: 'number', title: 'Day number of trip (optional)' }),
+    defineField({ name: 'lat', type: 'number', title: 'Latitude (decimal degrees, optional)', description: 'e.g. 32.1714 — where this was written' }),
+    defineField({ name: 'lon', type: 'number', title: 'Longitude (decimal degrees, optional)', description: 'e.g. 77.0911' }),
     defineField({
       name: 'format',
       type: 'string',

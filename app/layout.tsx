@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import '@/styles/globals.css'
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['300', '400', '700'],
+  variable: '--font-dm-sans',
   display: 'swap',
 })
 
@@ -24,10 +26,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable} style={{ '--font-base': `var(--font-inter), sans-serif` } as React.CSSProperties}>
+    <html lang="en" className={dmSans.variable} style={{ '--font-base': `var(--font-dm-sans), sans-serif` } as React.CSSProperties}>
       <body>
         <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   )

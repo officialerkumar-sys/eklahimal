@@ -37,7 +37,6 @@ export async function generateMetadata({
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-IN', {
-    day: 'numeric',
     month: 'long',
     year: 'numeric',
   })
@@ -49,46 +48,61 @@ export default async function FilmPage({ params }: { params: { slug: string } })
 
   return (
     <main style={{ paddingTop: '56px' }}>
-      {/* Embed */}
+
+      {/* YouTube embed — full width */}
       {film.youtubeUrl && (
-        <div className="media-width" style={{ paddingTop: '40px' }}>
+        <div className="media-width" style={{ paddingTop: '32px' }}>
           <YouTubeEmbed url={film.youtubeUrl} title={film.title} />
         </div>
       )}
 
       {/* Title block */}
-      <div className="content-width" style={{ marginTop: '40px' }}>
-        <h1
+      <div className="content-width" style={{ marginTop: '36px' }}>
+
+        {/* Region + date — above title */}
+        <p
           style={{
-            fontSize: 'clamp(32px, 5vw, 56px)',
-            fontWeight: 300,
-            lineHeight: 1.1,
-            textTransform: 'lowercase',
-            color: 'var(--color-text)',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.10em',
+            color: 'var(--color-text-muted)',
+            marginBottom: '14px',
           }}
         >
+          {[film.region?.name, film.publishedAt ? formatDate(film.publishedAt) : null, film.duration ? `${film.duration} min` : null]
+            .filter(Boolean)
+            .join(' · ')}
+        </p>
+
+        {/* Title */}
+        <h1 className="display-title">
           {film.title}
         </h1>
 
-        <p
-          style={{
-            fontSize: 'var(--font-size-caption)',
-            color: 'var(--color-text-muted)',
-            marginTop: '16px',
-            display: 'flex',
-            gap: '0.5em',
-            flexWrap: 'wrap',
-          }}
-        >
-          {film.region?.name && <span>{film.region.name}</span>}
-          {film.publishedAt && <span>· {formatDate(film.publishedAt)}</span>}
-          {film.duration && <span>· {film.duration} min</span>}
-        </p>
+        {/* Logline */}
+        {film.logline && (
+          <p
+            style={{
+              fontSize: '17px',
+              color: 'var(--color-text-muted)',
+              marginTop: '16px',
+              lineHeight: 1.6,
+              textTransform: 'lowercase',
+            }}
+          >
+            {film.logline}
+          </p>
+        )}
       </div>
 
-      {/* Body */}
+      {/* Rule */}
+      <div className="content-width" style={{ marginTop: '36px' }}>
+        <div className="rule" />
+      </div>
+
+      {/* Body — story behind the film */}
       {film.body && film.body.length > 0 && (
-        <div className="content-width" style={{ marginTop: '48px' }}>
+        <div className="content-width" style={{ marginTop: '36px' }}>
           <PortableText value={film.body} />
         </div>
       )}
@@ -102,9 +116,9 @@ export default async function FilmPage({ params }: { params: { slug: string } })
           <span
             style={{
               display: 'block',
-              fontSize: '11px',
+              fontSize: '10px',
               textTransform: 'uppercase',
-              letterSpacing: 'var(--letter-spacing-label)',
+              letterSpacing: '0.12em',
               color: 'var(--color-text-muted)',
               marginBottom: '16px',
             }}
@@ -117,22 +131,23 @@ export default async function FilmPage({ params }: { params: { slug: string } })
             style={{ display: 'block', textDecoration: 'none' }}
           >
             {film.relatedEssay.coverImage && (
-              <div style={{ position: 'relative', width: '100%', aspectRatio: '3/2' }}>
+              <div style={{ position: 'relative', width: '100%', aspectRatio: '3/2', overflow: 'hidden' }}>
                 <Image
                   src={urlForImage(film.relatedEssay.coverImage).width(800).url()}
                   alt={film.relatedEssay.title}
                   fill
-                  sizes="720px"
-                  style={{ objectFit: 'cover' }}
+                  sizes="700px"
+                  style={{ objectFit: 'cover', transition: 'opacity var(--transition-base)' }}
+                  className="img-hover"
                 />
               </div>
             )}
             <h3
               style={{
-                fontSize: '20px',
-                fontWeight: 300,
+                fontSize: '17px',
+                fontWeight: 400,
                 color: 'var(--color-text)',
-                marginTop: '16px',
+                marginTop: '14px',
                 textTransform: 'lowercase',
               }}
             >

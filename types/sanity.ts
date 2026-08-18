@@ -79,6 +79,8 @@ export interface JournalEntry {
   elevation?: number
   temperature?: string
   dayNumber?: number
+  lat?: number
+  lon?: number
   format?: 'field-note' | 'night-note' | 'lookback' | 'unglamorous'
   body?: PortableTextBlock[]
   images?: SanityImage[]

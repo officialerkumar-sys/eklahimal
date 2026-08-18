@@ -5,9 +5,9 @@ import { useState } from 'react'
 import type { JournalEntry } from '@/types/sanity'
 
 const FORMAT_LABELS: Record<string, string> = {
-  'field-note': 'Field Note',
-  'night-note': 'Night Note',
-  'lookback': 'Lookback',
+  'field-note':  'Field Note',
+  'night-note':  'Night Note',
+  'lookback':    'Lookback',
   'unglamorous': 'Unglamorous Day',
 }
 
@@ -19,13 +19,18 @@ function formatDate(iso: string): string {
   })
 }
 
+function formatCoords(lat: number, lon: number): string {
+  const latDir = lat >= 0 ? 'N' : 'S'
+  const lonDir = lon >= 0 ? 'E' : 'W'
+  return `${Math.abs(lat).toFixed(4)}°${latDir}  ${Math.abs(lon).toFixed(4)}°${lonDir}`
+}
+
 interface JournalListProps {
   entries: (JournalEntry & { excerpt?: string })[]
 }
 
 export default function JournalList({ entries }: JournalListProps) {
   const [hovered, setHovered] = useState<string | null>(null)
-
   const hoveredEntry = entries.find((e) => e._id === hovered)
 
   return (
@@ -38,66 +43,27 @@ export default function JournalList({ entries }: JournalListProps) {
       }}
     >
       {/* Left column — entry list */}
-      <div
-        style={{
-          width: '40%',
-          paddingRight: '48px',
-        }}
-        className="journal-left"
-      >
+      <div style={{ width: '420px', flexShrink: 0 }} className="journal-left">
         {entries.map((entry) => (
           <Link
             key={entry._id}
             href={`/journal/${entry.slug.current}`}
             onMouseEnter={() => setHovered(entry._id)}
             onMouseLeave={() => setHovered(null)}
-            style={{
-              display: 'block',
-              padding: '16px 0',
-              textDecoration: 'none',
-              borderBottom: 'none',
-            }}
+            className={`journal-entry${hovered === entry._id ? ' journal-entry-active' : ''}`}
           >
-            {/* Date or day number */}
-            <span
-              style={{
-                display: 'block',
-                fontSize: '12px',
-                color: 'var(--color-text-muted)',
-                marginBottom: '4px',
-              }}
-            >
+            <span className="journal-entry-stamp">
               {entry.dayNumber ? `day ${entry.dayNumber}` : formatDate(entry.publishedAt)}
             </span>
-
-            {/* Title */}
-            <span
-              style={{
-                display: 'block',
-                fontSize: '16px',
-                color: hovered === entry._id ? 'var(--color-text)' : 'var(--color-text)',
-                textTransform: 'lowercase',
-                lineHeight: 1.3,
-                transition: 'color var(--transition-base)',
-              }}
-            >
+            <span className="journal-entry-title">
               {entry.title}
             </span>
-
-            {/* Format · Region */}
-            <span
-              style={{
-                display: 'block',
-                fontSize: '11px',
-                color: 'var(--color-text-muted)',
-                textTransform: 'uppercase',
-                letterSpacing: 'var(--letter-spacing-label)',
-                marginTop: '4px',
-              }}
-            >
-              {entry.format ? FORMAT_LABELS[entry.format] : ''}
-              {entry.region?.name ? ` · ${entry.region.name}` : ''}
-            </span>
+            {(entry.format || entry.region?.name) && (
+              <span className="journal-entry-meta">
+                {entry.format ? FORMAT_LABELS[entry.format] : ''}
+                {entry.region?.name ? ` · ${entry.region.name}` : ''}
+              </span>
+            )}
           </Link>
         ))}
       </div>
@@ -105,10 +71,10 @@ export default function JournalList({ entries }: JournalListProps) {
       {/* Right column — sticky preview */}
       <div
         style={{
-          width: '60%',
+          flex: 1,
           position: 'sticky',
           top: '80px',
-          paddingLeft: '48px',
+          paddingLeft: '56px',
           minHeight: '200px',
         }}
         className="journal-right"
@@ -119,24 +85,103 @@ export default function JournalList({ entries }: JournalListProps) {
             transition: 'opacity var(--transition-base)',
           }}
         >
-          {hoveredEntry?.excerpt && (
-            <p
-              style={{
-                fontSize: 'var(--font-size-body)',
-                lineHeight: 'var(--line-height-body)',
-                color: 'var(--color-text)',
-                textTransform: 'lowercase',
-              }}
-            >
-              {hoveredEntry.excerpt}
-            </p>
+          {hoveredEntry && (
+            <>
+              <h2
+                style={{
+                  fontSize: '32px',
+                  fontWeight: 300,
+                  letterSpacing: '-0.01em',
+                  lineHeight: 1.2,
+                  color: 'var(--color-text)',
+                  textTransform: 'lowercase',
+                  marginBottom: '12px',
+                }}
+              >
+                {hoveredEntry.title}
+              </h2>
+              <p
+                style={{
+                  fontSize: '13px',
+                  color: 'var(--color-text-muted)',
+                  fontWeight: 300,
+                  marginBottom: (hoveredEntry.lat != null && hoveredEntry.lon != null) ? '6px' : '20px',
+                }}
+              >
+                {[
+                  hoveredEntry.dayNumber ? `day ${hoveredEntry.dayNumber}` : formatDate(hoveredEntry.publishedAt),
+                  hoveredEntry.region?.name,
+                  hoveredEntry.elevation ? `${hoveredEntry.elevation} m` : null,
+                  hoveredEntry.temperature ?? null,
+                ].filter(Boolean).join(' · ')}
+              </p>
+              {hoveredEntry.lat != null && hoveredEntry.lon != null && (
+                <p
+                  style={{
+                    fontSize: '11px',
+                    fontWeight: 300,
+                    color: 'rgba(138,155,176,0.5)',
+                    letterSpacing: '0.06em',
+                    fontVariantNumeric: 'tabular-nums',
+                    marginBottom: '20px',
+                  }}
+                >
+                  {formatCoords(hoveredEntry.lat, hoveredEntry.lon)}
+                </p>
+              )}
+              {hoveredEntry.excerpt && (
+                <p
+                  style={{
+                    fontSize: 'var(--font-size-body)',
+                    lineHeight: 'var(--line-height-body)',
+                    color: 'var(--color-text)',
+                    textTransform: 'lowercase',
+                    fontWeight: 300,
+                  }}
+                >
+                  {hoveredEntry.excerpt}
+                </p>
+              )}
+            </>
           )}
         </div>
       </div>
 
       <style>{`
+        .journal-entry {
+          display: block;
+          padding: 14px 0;
+          border-bottom: 1px solid rgba(61,74,92,0.15);
+          text-decoration: none;
+          transition: opacity var(--transition-base);
+        }
+        .journal-entry:hover { opacity: 0.75; }
+        .journal-entry-stamp {
+          display: block;
+          font-size: 12px;
+          font-weight: 300;
+          color: var(--color-text-muted);
+          margin-bottom: 3px;
+        }
+        .journal-entry-title {
+          display: block;
+          font-size: 16px;
+          font-weight: 300;
+          color: var(--color-text);
+          text-transform: lowercase;
+          line-height: 1.35;
+        }
+        .journal-entry-meta {
+          display: block;
+          font-size: 11px;
+          font-weight: 300;
+          color: var(--color-text-muted);
+          text-transform: uppercase;
+          letter-spacing: var(--letter-spacing-label);
+          margin-top: 4px;
+        }
         @media (max-width: 768px) {
-          .journal-left { width: 100% !important; padding-right: 0 !important; }
+          .journal-left { width: 100% !important; }
           .journal-right { display: none !important; }
         }
       `}</style>

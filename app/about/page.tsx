@@ -25,7 +25,7 @@ export default async function AboutPage() {
         <div
           style={{
             width: '100%',
-            maxHeight: '60vh',
+            height: '62vh',
             overflow: 'hidden',
             position: 'relative',
           }}
@@ -33,10 +33,9 @@ export default async function AboutPage() {
           <Image
             src={heroImage}
             alt="Himalaya"
-            width={1400}
-            height={0}
+            fill
             sizes="100vw"
-            style={{ width: '100%', height: 'auto', display: 'block' }}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
             priority
           />
         </div>
@@ -69,6 +68,7 @@ export default async function AboutPage() {
 
         {/* External links */}
         {(settings?.youtubeUrl || settings?.instagramUrl) && (
+          <>
           <div
             style={{
               marginTop: '48px',
@@ -81,20 +81,7 @@ export default async function AboutPage() {
                 href={settings.youtubeUrl}
                 target="_blank"
                 rel="noreferrer"
-                style={{
-                  fontSize: '11px',
-                  textTransform: 'uppercase',
-                  letterSpacing: 'var(--letter-spacing-label)',
-                  color: 'var(--color-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color var(--transition-base)',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.color = 'var(--color-text)'
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.color = 'var(--color-text-muted)'
-                }}
+                className="about-ext-link"
               >
                 YouTube
               </a>
@@ -104,25 +91,25 @@ export default async function AboutPage() {
                 href={settings.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                style={{
-                  fontSize: '11px',
-                  textTransform: 'uppercase',
-                  letterSpacing: 'var(--letter-spacing-label)',
-                  color: 'var(--color-text-muted)',
-                  textDecoration: 'none',
-                  transition: 'color var(--transition-base)',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.color = 'var(--color-text)'
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.color = 'var(--color-text-muted)'
-                }}
+                className="about-ext-link"
               >
                 Instagram
               </a>
             )}
           </div>
+          <style>{`
+            .about-ext-link {
+              font-size: 11px;
+              font-weight: 300;
+              text-transform: uppercase;
+              letter-spacing: var(--letter-spacing-label);
+              color: var(--color-text-muted);
+              text-decoration: none;
+              transition: color var(--transition-base);
+            }
+            .about-ext-link:hover { color: var(--color-text); }
+          `}</style>
+          </>
         )}
       </div>
     </main>

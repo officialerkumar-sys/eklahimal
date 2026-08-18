@@ -18,8 +18,17 @@ export default async function FilmsPage({
   const totalPages = Math.ceil(total / PER_PAGE)
 
   return (
-    <main style={{ paddingTop: '96px' }}>
+    <main style={{ paddingTop: '80px', paddingBottom: 'var(--space-section)' }}>
       <div className="media-width">
+
+        {/* Page header */}
+        <div className="page-header">
+          <span className="page-header-label">films</span>
+          {total > 0 && (
+            <span className="page-header-count">{total}</span>
+          )}
+        </div>
+
         {films.length === 0 ? (
           <p style={{ fontSize: 'var(--font-size-caption)', color: 'var(--color-text-muted)' }}>
             nothing published yet.
@@ -27,7 +36,10 @@ export default async function FilmsPage({
         ) : (
           <>
             {films.map((film, i) => (
-              <div key={film._id} style={{ marginTop: i === 0 ? 0 : 'var(--space-card)' }}>
+              <div
+                key={film._id}
+                style={{ marginTop: i === 0 ? 0 : 'var(--space-card)' }}
+              >
                 <FilmCard film={film} />
               </div>
             ))}

@@ -5,13 +5,6 @@ import { getAllPieces, getAllRegions } from '@/lib/sanity/queries/archive'
 export const metadata: Metadata = { title: 'archive' }
 export const revalidate = 60
 
-const TYPE_LABELS: Record<string, string> = {
-  film: 'film',
-  photoEssay: 'essay',
-  dispatch: 'dispatch',
-  journalEntry: 'journal',
-}
-
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-IN', {
     day: 'numeric',
@@ -100,19 +93,20 @@ export default async function ArchivePage({
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: '120px 1fr 80px 120px',
+                gridTemplateColumns: '110px 1fr 180px',
                 gap: '0 24px',
-                paddingBottom: '16px',
-                borderBottom: '1px solid rgba(61,74,92,0.4)',
-                marginBottom: '8px',
+                paddingBottom: '14px',
+                borderBottom: '1px solid rgba(61,74,92,0.35)',
+                marginBottom: '4px',
               }}
               className="archive-header"
             >
-              {['date', 'title', 'type', 'region'].map((h) => (
+              {['date', 'title', 'region'].map((h) => (
                 <span
                   key={h}
                   style={{
                     fontSize: '11px',
+                    fontWeight: 300,
                     textTransform: 'uppercase',
                     letterSpacing: 'var(--letter-spacing-label)',
                     color: 'var(--color-text-muted)',
@@ -129,24 +123,18 @@ export default async function ArchivePage({
                 href={pieceHref(piece._type, piece.slug.current)}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: '120px 1fr 80px 120px',
+                  gridTemplateColumns: '110px 1fr 180px',
                   gap: '0 24px',
-                  padding: '12px 0',
+                  padding: '11px 0',
                   textDecoration: 'none',
-                  borderBottom: '1px solid rgba(61,74,92,0.2)',
-                  transition: 'opacity var(--transition-base)',
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = '0.7'
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = '1'
+                  borderBottom: '1px solid rgba(61,74,92,0.15)',
                 }}
                 className="archive-row"
               >
                 <span
                   style={{
-                    fontSize: 'var(--font-size-caption)',
+                    fontSize: '13px',
+                    fontWeight: 300,
                     color: 'var(--color-text-muted)',
                     whiteSpace: 'nowrap',
                   }}
@@ -155,7 +143,8 @@ export default async function ArchivePage({
                 </span>
                 <span
                   style={{
-                    fontSize: 'var(--font-size-caption)',
+                    fontSize: '14px',
+                    fontWeight: 300,
                     color: 'var(--color-text)',
                     textTransform: 'lowercase',
                     overflow: 'hidden',
@@ -167,17 +156,8 @@ export default async function ArchivePage({
                 </span>
                 <span
                   style={{
-                    fontSize: '11px',
-                    textTransform: 'uppercase',
-                    letterSpacing: 'var(--letter-spacing-label)',
-                    color: 'var(--color-text-muted)',
-                  }}
-                >
-                  {TYPE_LABELS[piece._type] ?? piece._type}
-                </span>
-                <span
-                  style={{
-                    fontSize: 'var(--font-size-caption)',
+                    fontSize: '13px',
+                    fontWeight: 300,
                     color: 'var(--color-text-muted)',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -193,6 +173,8 @@ export default async function ArchivePage({
       </div>
 
       <style>{`
+        .archive-row { transition: opacity var(--transition-base); }
+        .archive-row:hover { opacity: 0.65; }
         @media (max-width: 768px) {
           .archive-header { display: none !important; }
           .archive-row {
@@ -200,8 +182,7 @@ export default async function ArchivePage({
             grid-template-rows: auto auto;
             gap: 4px 16px !important;
           }
-          .archive-row > span:nth-child(3),
-          .archive-row > span:nth-child(4) {
+          .archive-row > span:nth-child(3) {
             grid-column: 2;
           }
         }

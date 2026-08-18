@@ -9,9 +9,9 @@ import { urlForImage } from '@/lib/sanity/image'
 export const revalidate = 60
 
 const FORMAT_LABELS: Record<string, string> = {
-  'field-note': 'Field Note',
-  'night-note': 'Night Note',
-  'lookback': 'Lookback',
+  'field-note':  'Field Note',
+  'night-note':  'Night Note',
+  'lookback':    'Lookback',
   'unglamorous': 'Unglamorous Day',
 }
 
@@ -42,40 +42,70 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
   const entry = await getJournalEntryBySlug(params.slug)
   if (!entry) notFound()
 
+  function formatCoords(lat: number, lon: number): string {
+    const latDir = lat >= 0 ? 'N' : 'S'
+    const lonDir = lon >= 0 ? 'E' : 'W'
+    return `${Math.abs(lat).toFixed(4)}°${latDir}  ${Math.abs(lon).toFixed(4)}°${lonDir}`
+  }
+
   const metaParts: string[] = []
   if (entry.publishedAt) metaParts.push(formatDate(entry.publishedAt))
   if (entry.region?.name) metaParts.push(entry.region.name)
-  if (entry.elevation) metaParts.push(`${entry.elevation}m`)
+  if (entry.elevation) metaParts.push(`${entry.elevation} m`)
   if (entry.temperature) metaParts.push(entry.temperature)
 
+  const coordStr = entry.lat != null && entry.lon != null
+    ? formatCoords(entry.lat, entry.lon)
+    : null
+
   return (
-    <main style={{ paddingTop: '96px', paddingBottom: 'var(--space-section)' }}>
+    <main style={{ paddingTop: '88px', paddingBottom: 'var(--space-section)' }}>
       <div className="content-width">
-        {/* Format tag */}
-        {entry.format && (
-          <span
-            style={{
-              display: 'block',
-              fontSize: '12px',
-              textTransform: 'uppercase',
-              letterSpacing: 'var(--letter-spacing-label)',
-              color: 'var(--color-text-muted)',
-              marginBottom: '16px',
-            }}
-          >
-            {FORMAT_LABELS[entry.format] ?? entry.format}
-          </span>
-        )}
+
+        {/* Format + day number */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '16px',
+            alignItems: 'center',
+            marginBottom: '20px',
+          }}
+        >
+          {entry.format && (
+            <span
+              style={{
+                fontSize: '10px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.12em',
+                color: 'var(--color-text-muted)',
+              }}
+            >
+              {FORMAT_LABELS[entry.format] ?? entry.format}
+            </span>
+          )}
+          {entry.dayNumber && (
+            <span
+              style={{
+                fontSize: '10px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.10em',
+                color: 'rgba(138,155,176,0.5)',
+              }}
+            >
+              day {entry.dayNumber}
+            </span>
+          )}
+        </div>
 
         {/* Title */}
         <h1
           style={{
-            fontSize: 'clamp(24px, 4vw, 40px)',
+            fontSize: 'clamp(22px, 3.5vw, 40px)',
             fontWeight: 400,
             lineHeight: 1.2,
             color: 'var(--color-text)',
             textTransform: 'lowercase',
-            marginBottom: '16px',
+            marginBottom: '14px',
           }}
         >
           {entry.title}
@@ -85,14 +115,35 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
         {metaParts.length > 0 && (
           <p
             style={{
-              fontSize: 'var(--font-size-caption)',
+              fontSize: '12px',
+              fontWeight: 300,
               color: 'var(--color-text-muted)',
-              marginBottom: '48px',
+              letterSpacing: '0.04em',
+              marginBottom: coordStr ? '6px' : '36px',
             }}
           >
             {metaParts.join(' · ')}
           </p>
         )}
+
+        {/* Coordinates */}
+        {coordStr && (
+          <p
+            style={{
+              fontSize: '11px',
+              fontWeight: 300,
+              color: 'rgba(138,155,176,0.55)',
+              letterSpacing: '0.06em',
+              fontVariantNumeric: 'tabular-nums',
+              marginBottom: '36px',
+            }}
+          >
+            {coordStr}
+          </p>
+        )}
+
+        {/* Rule */}
+        <div className="rule" style={{ marginBottom: '36px' }} />
 
         {/* Body */}
         {entry.body && entry.body.length > 0 && (
@@ -105,11 +156,11 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
             {entry.images.map((img, i) => (
               <div key={i} style={{ marginTop: i === 0 ? 0 : '24px' }}>
                 <Image
-                  src={urlForImage(img).width(720).url()}
+                  src={urlForImage(img).width(700).url()}
                   alt=""
-                  width={720}
+                  width={700}
                   height={0}
-                  sizes="720px"
+                  sizes="700px"
                   style={{ width: '100%', height: 'auto' }}
                 />
               </div>
@@ -120,10 +171,10 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
         {/* End mark */}
         <p
           style={{
-            fontSize: 'var(--font-size-caption)',
-            color: 'var(--color-text-muted)',
+            fontSize: '13px',
+            color: 'rgba(138,155,176,0.5)',
             textAlign: 'right',
-            marginTop: '64px',
+            marginTop: '56px',
           }}
         >
           —
@@ -131,26 +182,31 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
 
         {/* Linked film */}
         {entry.linkedFilm && (
-          <div style={{ marginTop: '48px' }}>
+          <div
+            style={{
+              marginTop: '40px',
+              paddingTop: '28px',
+              borderTop: '1px solid rgba(61,74,92,0.25)',
+            }}
+          >
             <Link
               href={`/films/${entry.linkedFilm.slug.current}`}
-              style={{
-                fontSize: '11px',
-                textTransform: 'uppercase',
-                letterSpacing: 'var(--letter-spacing-label)',
-                color: 'var(--color-text-muted)',
-                textDecoration: 'none',
-                transition: 'color var(--transition-base)',
-              }}
-              onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.color = 'var(--color-text)'
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.color = 'var(--color-text-muted)'
-              }}
+              className="linked-film-link"
             >
               part of the film → {entry.linkedFilm.title}
             </Link>
+            <style>{`
+              .linked-film-link {
+                font-size: 11px;
+                font-weight: 300;
+                text-transform: uppercase;
+                letter-spacing: 0.10em;
+                color: var(--color-text-muted);
+                text-decoration: none;
+                transition: color var(--transition-base);
+              }
+              .linked-film-link:hover { color: var(--color-text); }
+            `}</style>
           </div>
         )}
       </div>

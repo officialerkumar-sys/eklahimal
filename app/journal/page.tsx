@@ -9,8 +9,17 @@ export default async function JournalPage() {
   const entries = await getJournalEntries()
 
   return (
-    <main style={{ paddingTop: '96px' }}>
+    <main style={{ paddingTop: '80px', paddingBottom: 'var(--space-section)' }}>
       <div className="media-width">
+
+        {/* Page header */}
+        <div className="page-header">
+          <span className="page-header-label">field journal</span>
+          {entries.length > 0 && (
+            <span className="page-header-count">{entries.length} entries</span>
+          )}
+        </div>
+
         {entries.length === 0 ? (
           <p style={{ fontSize: 'var(--font-size-caption)', color: 'var(--color-text-muted)' }}>
             nothing published yet.
@@ -19,7 +28,6 @@ export default async function JournalPage() {
           <JournalList entries={entries} />
         )}
       </div>
-      <div style={{ height: 'var(--space-section)' }} />
     </main>
   )
 }

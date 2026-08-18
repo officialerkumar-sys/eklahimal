@@ -19,10 +19,12 @@ export default function Hero({ film }: HeroProps) {
         height: '100dvh',
         width: '100%',
         overflow: 'hidden',
+        background: imageUrl
+          ? undefined
+          : 'repeating-linear-gradient(101deg, #2A313A 0px, #2A313A 6px, #232A33 6px, #232A33 13px)',
         backgroundColor: 'var(--color-bg)',
       }}
     >
-      {/* Background image */}
       {imageUrl && (
         <Image
           src={imageUrl}
@@ -34,12 +36,12 @@ export default function Hero({ film }: HeroProps) {
         />
       )}
 
-      {/* Dark overlay */}
+      {/* Gradient overlay — stronger at bottom for legibility */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundColor: 'rgba(28,33,40,0.45)',
+          background: 'linear-gradient(to bottom, transparent 40%, rgba(28,33,40,0.7) 100%)',
         }}
         aria-hidden="true"
       />
@@ -58,36 +60,35 @@ export default function Hero({ film }: HeroProps) {
       >
         <span
           style={{
-            fontSize: '14px',
-            fontWeight: 700,
+            fontSize: '13px',
+            fontWeight: 300,
             letterSpacing: 'var(--letter-spacing-brand)',
             textTransform: 'uppercase',
             color: 'var(--color-accent)',
           }}
         >
-          Eklahimal
+          eklahimal
         </span>
 
         <Link
           href={`/films/${film.slug.current}`}
-          style={{
-            fontSize: '14px',
-            fontWeight: 400,
-            color: 'var(--color-text-muted)',
-            textDecoration: 'none',
-            textTransform: 'lowercase',
-            transition: 'color var(--transition-base)',
-          }}
-          onMouseEnter={(e) => {
-            (e.target as HTMLElement).style.color = 'var(--color-text)'
-          }}
-          onMouseLeave={(e) => {
-            (e.target as HTMLElement).style.color = 'var(--color-text-muted)'
-          }}
+          className="hero-film-link"
         >
           {film.title}
         </Link>
       </div>
+
+      <style>{`
+        .hero-film-link {
+          font-size: 14px;
+          font-weight: 300;
+          color: var(--color-text-muted);
+          text-decoration: none;
+          text-transform: lowercase;
+          transition: color var(--transition-base);
+        }
+        .hero-film-link:hover { color: var(--color-text); }
+      `}</style>
     </section>
   )
 }

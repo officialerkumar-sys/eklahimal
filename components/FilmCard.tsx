@@ -7,84 +7,90 @@ interface FilmCardProps {
   film: Film
 }
 
+function getYear(iso?: string): string {
+  if (!iso) return ''
+  return new Date(iso).getFullYear().toString()
+}
+
 export default function FilmCard({ film }: FilmCardProps) {
   const imageUrl = film.thumbnail
-    ? urlForImage(film.thumbnail).width(1200).height(675).url()
+    ? urlForImage(film.thumbnail).width(1400).height(788).url()
     : null
+
+  const year = getYear(film.publishedAt)
 
   return (
     <article>
-      <Link href={`/films/${film.slug.current}`} style={{ display: 'block' }}>
+      <Link href={`/films/${film.slug.current}`} style={{ display: 'block', textDecoration: 'none' }} className="film-card-link">
+
         {/* Thumbnail */}
-        {imageUrl && (
-          <div
-            style={{
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '16/9',
-              overflow: 'hidden',
-            }}
-          >
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16/9',
+            overflow: 'hidden',
+            background: imageUrl
+              ? undefined
+              : 'repeating-linear-gradient(101deg, #2A313A 0px, #2A313A 6px, #232A33 6px, #232A33 13px)',
+          }}
+        >
+          {imageUrl && (
             <Image
               src={imageUrl}
               alt={film.title}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-              style={{
-                objectFit: 'cover',
-                opacity: 1,
-                transition: 'opacity var(--transition-base)',
-              }}
-              onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.opacity = '0.85'
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.opacity = '1'
-              }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1400px) 90vw, 1200px"
+              style={{ objectFit: 'cover', transition: 'opacity var(--transition-base)' }}
+              className="film-thumb"
             />
-          </div>
-        )}
+          )}
+        </div>
 
-        {/* Title */}
-        <h2
-          style={{
-            fontSize: 'var(--font-size-display)',
-            fontWeight: 300,
-            lineHeight: 1.1,
-            color: 'var(--color-text)',
-            textTransform: 'lowercase',
-            marginTop: '24px',
-          }}
-        >
-          {film.title}
-        </h2>
+        {/* Text block */}
+        <div style={{ marginTop: '20px', maxWidth: '760px' }}>
 
-        {/* Meta */}
-        <p
-          style={{
-            fontSize: 'var(--font-size-caption)',
-            color: 'var(--color-text-muted)',
-            marginTop: '12px',
-          }}
-        >
-          {film.region?.name}
-          {film.duration ? ` · ${film.duration} min` : ''}
-        </p>
+          {/* Title */}
+          <h2 className="card-title">
+            {film.title}
+          </h2>
 
-        {/* Logline */}
-        {film.logline && (
+          {/* Meta */}
           <p
             style={{
-              fontSize: '16px',
+              fontSize: '14px',
+              fontWeight: 300,
               color: 'var(--color-text-muted)',
-              marginTop: '8px',
-              textTransform: 'lowercase',
+              marginTop: '10px',
             }}
           >
-            {film.logline}
+            {[film.region?.name, year, film.duration ? `${film.duration} min` : null]
+              .filter(Boolean)
+              .join(' · ')}
           </p>
-        )}
+
+          {/* Logline */}
+          {film.logline && (
+            <p
+              style={{
+                fontSize: '16px',
+                fontWeight: 300,
+                color: 'var(--color-text-muted)',
+                marginTop: '8px',
+                textTransform: 'lowercase',
+                lineHeight: 1.6,
+                maxWidth: '640px',
+              }}
+            >
+              {film.logline}
+            </p>
+          )}
+        </div>
       </Link>
+
+      <style>{`
+        .film-card-link:hover .film-thumb { opacity: 0.85; }
+      `}</style>
     </article>
   )
 }

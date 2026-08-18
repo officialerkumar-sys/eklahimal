@@ -5,13 +5,13 @@ import type { JournalEntry } from '@/types/sanity'
 const REGION_FRAGMENT = groq`region->{ _id, name, slug, state }`
 
 const JOURNAL_LIST_FRAGMENT = groq`
-  _id, _type, title, slug, publishedAt, format, dayNumber, elevation, temperature,
+  _id, _type, title, slug, publishedAt, format, dayNumber, elevation, temperature, lat, lon,
   ${REGION_FRAGMENT},
   "excerpt": pt::text(body)[0..300]
 `
 
 const JOURNAL_FULL_FRAGMENT = groq`
-  _id, _type, title, slug, publishedAt, format, dayNumber, elevation, temperature,
+  _id, _type, title, slug, publishedAt, format, dayNumber, elevation, temperature, lat, lon,
   ${REGION_FRAGMENT}, body, images,
   linkedFilm->{ _id, title, slug }
 `
