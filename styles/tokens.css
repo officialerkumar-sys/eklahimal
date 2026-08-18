@@ -1,11 +1,11 @@
 :root {
   /* Colors */
-  --color-bg:             #1C2128;
-  --color-bg-mid:         #3D4A5C;
-  --color-text:           #F2EDE8;
-  --color-text-muted:     #8A9BB0;
-  --color-accent:         #C4622D;
-  --color-accent-hover:   #E8965A;
+  --color-bg:             #1A1D23;
+  --color-bg-mid:         #2B3140;
+  --color-text:           #E2EAF0;
+  --color-text-muted:     #748090;
+  --color-accent:         #B89048;
+  --color-accent-hover:   #D4AA64;
 
   /* Typography */
   --font-base:            'DM Sans', sans-serif;

@@ -122,7 +122,7 @@ export default function TripLogSection({ tripLog }: TripLogSectionProps) {
                     justifyContent: 'space-between',
                     alignItems: 'baseline',
                     padding: '8px 0',
-                    borderBottom: '1px solid rgba(61,74,92,0.4)',
+                    borderBottom: '1px solid rgba(43,49,64,0.4)',
                   }}
                 >
                   <span

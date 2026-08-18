@@ -19,7 +19,7 @@ export default async function Footer() {
   const settings = await getSiteSettings()
 
   return (
-    <footer style={{ borderTop: '1px solid rgba(61,74,92,0.5)', marginTop: 'var(--space-section)' }}>
+    <footer style={{ borderTop: '1px solid rgba(43,49,64,0.5)', marginTop: 'var(--space-section)' }}>
 
       {/* ── Main body ── */}
       <div
@@ -106,7 +106,7 @@ export default async function Footer() {
       {/* ── Bottom bar ── */}
       <div
         style={{
-          borderTop: '1px solid rgba(61,74,92,0.12)',
+          borderTop: '1px solid rgba(43,49,64,0.12)',
           padding: '20px 40px',
           maxWidth: '1600px',
           margin: '0 auto',
@@ -169,7 +169,7 @@ export default async function Footer() {
           font-weight: 300;
           text-transform: uppercase;
           letter-spacing: var(--letter-spacing-label);
-          color: rgba(138,155,176,0.5);
+          color: rgba(116,128,144,0.5);
           text-decoration: none;
           transition: color var(--transition-base);
         }

@@ -96,7 +96,7 @@ export default async function ArchivePage({
                 gridTemplateColumns: '110px 1fr 180px',
                 gap: '0 24px',
                 paddingBottom: '14px',
-                borderBottom: '1px solid rgba(61,74,92,0.35)',
+                borderBottom: '1px solid rgba(43,49,64,0.35)',
                 marginBottom: '4px',
               }}
               className="archive-header"
@@ -127,7 +127,7 @@ export default async function ArchivePage({
                   gap: '0 24px',
                   padding: '11px 0',
                   textDecoration: 'none',
-                  borderBottom: '1px solid rgba(61,74,92,0.15)',
+                  borderBottom: '1px solid rgba(43,49,64,0.15)',
                 }}
                 className="archive-row"
               >

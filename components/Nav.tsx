@@ -45,10 +45,10 @@ export default function Nav() {
           right: 0,
           height: '56px',
           zIndex: 100,
-          backgroundColor: scrolled ? 'rgba(28,33,40,0.92)' : 'rgba(28,33,40,0.55)',
+          backgroundColor: scrolled ? 'rgba(26,29,35,0.92)' : 'rgba(26,29,35,0.55)',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
-          borderBottom: scrolled ? 'none' : '1px solid rgba(61,74,92,0.2)',
+          borderBottom: scrolled ? 'none' : '1px solid rgba(43,49,64,0.2)',
           transform: visible ? 'translateY(0)' : 'translateY(-100%)',
           transition: 'transform var(--transition-base), background-color var(--transition-base), border-color var(--transition-base)',
         }}

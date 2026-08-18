@@ -54,7 +54,7 @@ export default async function DispatchesPage() {
                   marginTop: i === 0 ? 0 : '36px',
                   paddingBottom: '36px',
                   borderBottom: i < dispatches.length - 1
-                    ? '1px solid rgba(61,74,92,0.2)'
+                    ? '1px solid rgba(43,49,64,0.2)'
                     : 'none',
                 }}
               >

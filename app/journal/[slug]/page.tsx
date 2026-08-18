@@ -92,7 +92,7 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
                 fontSize: '10px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.10em',
-                color: 'rgba(138,155,176,0.5)',
+                color: 'rgba(116,128,144,0.5)',
               }}
             >
               day {entry.dayNumber}
@@ -135,7 +135,7 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
             style={{
               fontSize: '11px',
               fontWeight: 300,
-              color: 'rgba(138,155,176,0.55)',
+              color: 'rgba(116,128,144,0.55)',
               letterSpacing: '0.06em',
               fontVariantNumeric: 'tabular-nums',
               marginBottom: '36px',
@@ -175,7 +175,7 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
         <p
           style={{
             fontSize: '13px',
-            color: 'rgba(138,155,176,0.5)',
+            color: 'rgba(116,128,144,0.5)',
             textAlign: 'right',
             marginTop: '56px',
           }}
@@ -189,7 +189,7 @@ export default async function JournalEntryPage({ params }: { params: { slug: str
             style={{
               marginTop: '40px',
               paddingTop: '28px',
-              borderTop: '1px solid rgba(61,74,92,0.25)',
+              borderTop: '1px solid rgba(43,49,64,0.25)',
             }}
           >
             <Link

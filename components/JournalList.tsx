@@ -120,7 +120,7 @@ export default function JournalList({ entries }: JournalListProps) {
                   style={{
                     fontSize: '11px',
                     fontWeight: 300,
-                    color: 'rgba(138,155,176,0.5)',
+                    color: 'rgba(116,128,144,0.5)',
                     letterSpacing: '0.06em',
                     fontVariantNumeric: 'tabular-nums',
                     marginBottom: '20px',
@@ -151,7 +151,7 @@ export default function JournalList({ entries }: JournalListProps) {
         .journal-entry {
           display: block;
           padding: 14px 0;
-          border-bottom: 1px solid rgba(61,74,92,0.15);
+          border-bottom: 1px solid rgba(43,49,64,0.15);
           text-decoration: none;
           transition: opacity var(--transition-base);
         }

@@ -73,7 +73,7 @@ export default function ContentFeed({ pieces }: ContentFeedProps) {
                   overflow: 'hidden',
                   background: imageUrl
                     ? undefined
-                    : 'repeating-linear-gradient(101deg, #2A313A 0px, #2A313A 6px, #232A33 6px, #232A33 13px)',
+                    : 'repeating-linear-gradient(101deg, #282D35 0px, #282D35 6px, #21262E 6px, #21262E 13px)',
                 }}
               >
                 {imageUrl && (
@@ -117,7 +117,7 @@ export default function ContentFeed({ pieces }: ContentFeedProps) {
                     <span
                       style={{
                         fontSize: '11px',
-                        color: 'rgba(138,155,176,0.55)',
+                        color: 'rgba(116,128,144,0.55)',
                         textTransform: 'uppercase',
                         letterSpacing: '0.10em',
                         fontWeight: 300,

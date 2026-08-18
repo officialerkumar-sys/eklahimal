@@ -69,7 +69,7 @@ export default async function EssaysPage() {
                           style={{
                             width: '100%',
                             aspectRatio: '4/3',
-                            background: 'repeating-linear-gradient(101deg, #2A313A 0px, #2A313A 6px, #232A33 6px, #232A33 13px)',
+                            background: 'repeating-linear-gradient(101deg, #282D35 0px, #282D35 6px, #21262E 6px, #21262E 13px)',
                           }}
                         />
                       )}
@@ -120,7 +120,7 @@ export default async function EssaysPage() {
                           style={{
                             width: '100%',
                             aspectRatio: '4/3',
-                            background: 'repeating-linear-gradient(101deg, #2A313A 0px, #2A313A 6px, #232A33 6px, #232A33 13px)',
+                            background: 'repeating-linear-gradient(101deg, #282D35 0px, #282D35 6px, #21262E 6px, #21262E 13px)',
                           }}
                         />
                       )}

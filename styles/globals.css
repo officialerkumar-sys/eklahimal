@@ -100,7 +100,7 @@ img, video {
   align-items: baseline;
   justify-content: space-between;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(61, 74, 92, 0.5);
+  border-bottom: 1px solid rgba(43, 49, 64, 0.5);
   margin-bottom: 48px;
 }
 
@@ -115,7 +115,7 @@ img, video {
 .page-header-count {
   font-size: 13px;
   font-weight: 300;
-  color: rgba(138, 155, 176, 0.5);
+  color: rgba(116, 128, 144, 0.5);
   letter-spacing: 0.04em;
 }
 
@@ -138,7 +138,7 @@ img, video {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.10em;
-  color: rgba(138, 155, 176, 0.5);
+  color: rgba(116, 128, 144, 0.5);
   display: block;
   margin-bottom: 20px;
 }
@@ -271,7 +271,7 @@ img, video {
 .rule {
   width: 100%;
   height: 1px;
-  background: rgba(61, 74, 92, 0.35);
+  background: rgba(43, 49, 64, 0.35);
 }
 
 /* ─── Mobile ────────────────────────────────────────────── */

@@ -21,7 +21,7 @@ export default function Hero({ film }: HeroProps) {
         overflow: 'hidden',
         background: imageUrl
           ? undefined
-          : 'repeating-linear-gradient(101deg, #2A313A 0px, #2A313A 6px, #232A33 6px, #232A33 13px)',
+          : 'repeating-linear-gradient(101deg, #282D35 0px, #282D35 6px, #21262E 6px, #21262E 13px)',
         backgroundColor: 'var(--color-bg)',
       }}
     >
@@ -41,7 +41,7 @@ export default function Hero({ film }: HeroProps) {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, transparent 40%, rgba(28,33,40,0.7) 100%)',
+          background: 'linear-gradient(to bottom, transparent 40%, rgba(26,29,35,0.7) 100%)',
         }}
         aria-hidden="true"
       />
