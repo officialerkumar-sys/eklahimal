@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 const LANGS = [
+  { code: 'en', label: 'EN' },
   { code: 'hi', label: 'हिंदी' },
   { code: 'ne', label: 'नेपाली' },
   { code: 'bn', label: 'বাংলা' },
@@ -50,12 +51,12 @@ export default function TranslateButtons({ variant = 'nav' }: { variant?: 'nav' 
       }
     >
       {LANGS.map(({ code, label }) => {
-        const isActive = active === code
+        const isActive = code === 'en' ? active === null : active === code
         return (
           <button
             key={code}
-            onClick={() => isActive ? resetLang() : setLang(code)}
-            title={isActive ? 'back to english' : label}
+            onClick={() => code === 'en' || isActive ? resetLang() : setLang(code)}
+            title={label}
             style={{
               background: 'none',
               border: 'none',
