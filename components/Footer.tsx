@@ -25,7 +25,7 @@ export default async function Footer() {
       style={{
         borderTop: '1px solid rgba(43,49,64,0.5)',
         marginTop: 'var(--space-section)',
-        backgroundImage: 'linear-gradient(rgba(26,29,35,0.82), rgba(26,29,35,0.82)), url(/sitemap_background.png)',
+        backgroundImage: 'linear-gradient(rgba(26,29,35,0.82), rgba(26,29,35,0.82)), url(/sitemap_background_v2.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center top',
         backgroundRepeat: 'no-repeat',
