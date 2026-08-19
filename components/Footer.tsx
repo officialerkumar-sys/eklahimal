@@ -5,13 +5,14 @@ const COL_ONE = [
   { href: '/films',      label: 'films' },
   { href: '/essays',     label: 'essays' },
   { href: '/journal',    label: 'journal' },
+  { href: '/dispatches', label: 'dispatches' },
 ]
 
 const COL_TWO = [
-  { href: '/dispatches', label: 'dispatches' },
   { href: '/about',      label: 'about' },
-  { href: '/archive',    label: 'archive' },
   { href: '/foundation', label: 'foundation' },
+  { href: '/archive',    label: 'archive' },
+  { href: '/contact',    label: 'contact' },
 ]
 
 const YEAR = new Date().getFullYear()
@@ -28,7 +29,7 @@ export default async function Footer() {
           maxWidth: '1600px',
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: '1fr auto auto',
+          gridTemplateColumns: '1fr auto auto auto',
           gap: '0 80px',
           padding: '56px 40px',
           alignItems: 'start',
@@ -102,6 +103,31 @@ export default async function Footer() {
             ))}
           </ul>
         </nav>
+
+        {/* Sitemap col 3 — shop & services */}
+        <nav aria-label="Shop and services">
+          <ul
+            style={{
+              listStyle: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '11px',
+            }}
+          >
+            <li>
+              <Link href="/shop" className="footer-nav-link">shop</Link>
+            </li>
+            <li style={{ paddingLeft: '14px' }}>
+              <Link href="/shop/photographs" className="footer-nav-link footer-nav-sub">photographs</Link>
+            </li>
+            <li style={{ paddingLeft: '14px' }}>
+              <Link href="/shop/gifts" className="footer-nav-link footer-nav-sub">gifts &amp; merch</Link>
+            </li>
+            <li style={{ marginTop: '6px' }}>
+              <Link href="/consulting" className="footer-nav-link">consulting</Link>
+            </li>
+          </ul>
+        </nav>
       </div>
 
       {/* ── Bottom bar ── */}
@@ -164,6 +190,10 @@ export default async function Footer() {
           transition: color var(--transition-base);
         }
         .footer-nav-link:hover { color: var(--color-accent); }
+        .footer-nav-sub {
+          font-size: 13px;
+          color: var(--color-text-muted);
+        }
 
         .footer-social-link {
           font-size: 11px;
@@ -182,6 +212,9 @@ export default async function Footer() {
             gap: 40px 32px !important;
           }
           .footer-grid > div:first-child {
+            grid-column: 1 / -1;
+          }
+          .footer-grid > nav:last-child {
             grid-column: 1 / -1;
           }
           .footer-bottom {
