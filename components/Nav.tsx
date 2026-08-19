@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import TranslateButtons from './TranslateButtons'
 
 const navLinks = [
   { href: '/films', label: 'films' },
@@ -95,6 +96,7 @@ export default function Nav() {
                 </Link>
               )
             })}
+            <TranslateButtons variant="nav" />
           </nav>
 
           {/* Mobile hamburger */}
@@ -149,6 +151,7 @@ export default function Nav() {
               {label}
             </Link>
           ))}
+          <TranslateButtons variant="mobile" />
         </div>
       )}
 

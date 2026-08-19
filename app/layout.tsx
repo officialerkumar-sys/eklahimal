@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { DM_Sans } from 'next/font/google'
+import Script from 'next/script'
 import '@/styles/globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -31,6 +32,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         {children}
         <Footer />
+        <div id="google_translate_element" style={{ display: 'none' }} aria-hidden="true" />
+        <Script
+          id="gt-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'hi,ne,bn',autoDisplay:false},'google_translate_element');}`,
+          }}
+        />
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )

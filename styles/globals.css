@@ -274,6 +274,18 @@ img, video {
   background: rgba(43, 49, 64, 0.35);
 }
 
+/* ─── Google Translate toolbar suppression ──────────────── */
+
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+iframe.goog-te-menu-frame {
+  display: none !important;
+}
+.skiptranslate { display: none !important; }
+body { top: 0 !important; }
+
+.translate-btn:hover { color: var(--color-text) !important; }
+
 /* ─── Mobile ────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
