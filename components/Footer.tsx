@@ -21,7 +21,16 @@ export default async function Footer() {
   const settings = await getSiteSettings()
 
   return (
-    <footer style={{ borderTop: '1px solid rgba(43,49,64,0.5)', marginTop: 'var(--space-section)' }}>
+    <footer
+      style={{
+        borderTop: '1px solid rgba(43,49,64,0.5)',
+        marginTop: 'var(--space-section)',
+        backgroundImage: 'linear-gradient(rgba(26,29,35,0.82), rgba(26,29,35,0.82)), url(/sitemap_background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
 
       {/* ── Main body ── */}
       <div
